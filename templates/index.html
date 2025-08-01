@@ -22,10 +22,23 @@
       color: white;
     }
     .calculator {
+<<<<<<< HEAD
       max-width: 420px;
       margin: 40px auto;
       border-radius: 20px;
       padding: 30px;
+=======
+      width: 100%;
+      max-width: 420px;
+      aspect-ratio: 7 / 9;
+      margin: 40px auto;
+      padding: 30px;
+      border-radius: 20px;
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+>>>>>>> 0a0d3f9 (🔄 最新電卓UIに更新)
     }
     .light-mode .calculator {
       background-color: #ffffff;
@@ -39,7 +52,7 @@
     }
     input[type="text"] {
       width: 100%;
-      font-size: 32px;
+      font-size: clamp(24px, 6vw, 32px);
       text-align: right;
       margin-bottom: 20px;
       border-radius: 10px;
@@ -54,11 +67,23 @@
     .btn-calc {
       width: 70px;
       height: 60px;
-      font-size: 22px;
+      font-size: 20px;
       margin: 5px;
       border-radius: 10px;
       transition: transform 0.2s, background-color 0.3s;
     }
+<<<<<<< HEAD
+=======
+
+    @media (max-width: 420px) {
+      .btn-calc {
+        width: 21vw;
+        height: 18vw;
+        font-size: 5vw;
+      }
+    }
+
+>>>>>>> 0a0d3f9 (🔄 最新電卓UIに更新)
     .btn-calc:hover {
       transform: scale(1.05);
     }
@@ -82,11 +107,19 @@
       top: 20px;
       right: 30px;
     }
+<<<<<<< HEAD
+=======
+
+>>>>>>> 0a0d3f9 (🔄 最新電卓UIに更新)
     .history-section {
       max-width: 420px;
       margin: 0 auto;
       margin-top: 20px;
     }
+<<<<<<< HEAD
+=======
+
+>>>>>>> 0a0d3f9 (🔄 最新電卓UIに更新)
     .history-title {
       font-weight: bold;
       font-size: 20px;
@@ -94,12 +127,20 @@
       justify-content: space-between;
       align-items: center;
     }
+<<<<<<< HEAD
+=======
+
+>>>>>>> 0a0d3f9 (🔄 最新電卓UIに更新)
     .history-card {
       background-color: rgba(0,0,0,0.05);
       padding: 10px 15px;
       border-radius: 10px;
       margin-bottom: 10px;
     }
+<<<<<<< HEAD
+=======
+
+>>>>>>> 0a0d3f9 (🔄 最新電卓UIに更新)
     .dark-mode .history-card {
       background-color: rgba(255,255,255,0.05);
     }
@@ -119,14 +160,20 @@
       <div class="d-flex justify-content-center">
         <!-- 左側：関数 + 数字 -->
         <div>
+<<<<<<< HEAD
           <!-- 関数ボタン -->
+=======
+>>>>>>> 0a0d3f9 (🔄 最新電卓UIに更新)
           <button type="button" class="btn btn-control btn-calc" onclick="append('AC')">AC</button>
           <button type="button" class="btn btn-control btn-calc" onclick="append('%')">%</button>
           <button type="button" class="btn btn-control btn-calc" onclick="append('Math.sqrt(')">√</button>
           <button type="button" class="btn btn-control btn-calc" onclick="append('(')">(</button>
           <button type="button" class="btn btn-control btn-calc" onclick="append(')')">)</button><br>
 
+<<<<<<< HEAD
           <!-- 数字 -->
+=======
+>>>>>>> 0a0d3f9 (🔄 最新電卓UIに更新)
           <button type="button" class="btn btn-secondary btn-calc" onclick="append('7')">7</button>
           <button type="button" class="btn btn-secondary btn-calc" onclick="append('8')">8</button>
           <button type="button" class="btn btn-secondary btn-calc" onclick="append('9')">9</button><br>
@@ -179,11 +226,34 @@
 
   <script>
     function append(val) {
+<<<<<<< HEAD
       if (val === 'AC') {
         clearInput();
       } else {
         document.getElementById("expression").value += val;
       }
+=======
+      const inputField = document.getElementById("expression");
+      let current = inputField.value;
+
+      const operators = "+-*/";
+
+      // AC の場合は初期化
+      if (val === 'AC') {
+        clearInput();
+        return;
+      }
+
+      // 四則演算子を入力したとき、直前が演算子なら置き換える
+      if (operators.includes(val)) {
+        if (current.length > 0 && operators.includes(current.slice(-1))) {
+          current = current.slice(0, -1);  // 最後の演算子を削除
+        }
+      }
+
+      // 値を更新
+      inputField.value = current + val;
+>>>>>>> 0a0d3f9 (🔄 最新電卓UIに更新)
     }
     function clearInput() {
       document.getElementById("expression").value = "";
@@ -204,6 +274,10 @@
         localStorage.setItem("theme", "light");
       }
     }
+<<<<<<< HEAD
+=======
+
+>>>>>>> 0a0d3f9 (🔄 最新電卓UIに更新)
     window.onload = () => {
       const theme = localStorage.getItem("theme");
       if (theme === "dark") {
@@ -212,5 +286,6 @@
       }
     };
   </script>
+
 </body>
 </html>
