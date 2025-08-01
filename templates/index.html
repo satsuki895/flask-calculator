@@ -1,4 +1,6 @@
 <!-- タイトル: index.html -->
+<!-- 縦横比維持 + レスポンシブ + 計算履歴 + ダーク/ライト切替 -->
+
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -19,17 +21,14 @@
       background: linear-gradient(to right, #2c3e50, #4ca1af);
       color: white;
     }
+
     .calculator {
-      width: 100%;
       max-width: 420px;
-      aspect-ratio: 7 / 9;
+      width: 100%;
+      aspect-ratio: 3 / 4.5;
       margin: 40px auto;
-      padding: 30px;
       border-radius: 20px;
-      box-sizing: border-box;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
+      padding: 30px;
     }
     .light-mode .calculator {
       background-color: #ffffff;
@@ -41,9 +40,10 @@
       color: white;
       box-shadow: 0 10px 30px rgba(0,0,0,0.3);
     }
+
     input[type="text"] {
       width: 100%;
-      font-size: clamp(24px, 6vw, 32px);
+      font-size: 32px;
       text-align: right;
       margin-bottom: 20px;
       border-radius: 10px;
@@ -55,31 +55,37 @@
       background-color: #2e2e40;
       color: #fff;
     }
+
     .btn-calc {
       width: 70px;
       height: 60px;
-      font-size: 20px;
+      font-size: 22px;
       margin: 5px;
       border-radius: 10px;
       transition: transform 0.2s, background-color 0.3s;
     }
-    @media (max-width: 420px) {
-      .btn-calc {
-        width: 21vw;
-        height: 18vw;
-        font-size: 5vw;
-      }
-    }
     .btn-calc:hover { transform: scale(1.05); }
     .btn-calc:active { transform: scale(0.95); }
-    .btn-operator { background-color: #ff6b6b; color: white; }
-    .btn-control { background-color: #4ecdc4; color: white; }
-    .btn-equal { background-color: #ffe66d; color: black; }
+
+    .btn-operator {
+      background-color: #ff6b6b;
+      color: white;
+    }
+    .btn-control {
+      background-color: #4ecdc4;
+      color: white;
+    }
+    .btn-equal {
+      background-color: #ffe66d;
+      color: black;
+    }
+
     .theme-toggle {
       position: absolute;
       top: 20px;
       right: 30px;
     }
+
     .history-section {
       max-width: 420px;
       margin: 0 auto;
@@ -101,6 +107,17 @@
     .dark-mode .history-card {
       background-color: rgba(255,255,255,0.05);
     }
+
+    @media (max-width: 480px) {
+      .btn-calc {
+        width: 20vw;
+        height: 15vw;
+        font-size: 5vw;
+      }
+      input[type="text"] {
+        font-size: 6vw;
+      }
+    }
   </style>
 </head>
 <body class="light-mode">
@@ -110,28 +127,37 @@
 
   <div class="calculator">
     <h2 class="text-center mb-3">Calculator</h2>
+
     <form method="POST">
       <input type="text" name="expression" id="expression" value="{{ expression }}" readonly>
+
       <div class="d-flex justify-content-center">
+        <!-- 数字・関数 -->
         <div>
           <button type="button" class="btn btn-control btn-calc" onclick="append('AC')">AC</button>
           <button type="button" class="btn btn-control btn-calc" onclick="append('%')">%</button>
-          <button type="button" class="btn btn-control btn-calc" onclick="append('sqrt(')">√</button>
+          <button type="button" class="btn btn-control btn-calc" onclick="append('Math.sqrt(')">√</button>
           <button type="button" class="btn btn-control btn-calc" onclick="append('(')">(</button>
           <button type="button" class="btn btn-control btn-calc" onclick="append(')')">)</button><br>
+
           <button type="button" class="btn btn-secondary btn-calc" onclick="append('7')">7</button>
           <button type="button" class="btn btn-secondary btn-calc" onclick="append('8')">8</button>
           <button type="button" class="btn btn-secondary btn-calc" onclick="append('9')">9</button><br>
+
           <button type="button" class="btn btn-secondary btn-calc" onclick="append('4')">4</button>
           <button type="button" class="btn btn-secondary btn-calc" onclick="append('5')">5</button>
           <button type="button" class="btn btn-secondary btn-calc" onclick="append('6')">6</button><br>
+
           <button type="button" class="btn btn-secondary btn-calc" onclick="append('1')">1</button>
           <button type="button" class="btn btn-secondary btn-calc" onclick="append('2')">2</button>
           <button type="button" class="btn btn-secondary btn-calc" onclick="append('3')">3</button><br>
+
           <button type="button" class="btn btn-control btn-calc" onclick="clearInput()">C</button>
           <button type="button" class="btn btn-secondary btn-calc" onclick="append('0')">0</button>
           <button type="button" class="btn btn-control btn-calc" onclick="backspace()">←</button>
         </div>
+
+        <!-- 演算子 -->
         <div class="d-flex flex-column ms-3">
           <button type="button" class="btn btn-operator btn-calc" onclick="append('+')">+</button>
           <button type="button" class="btn btn-operator btn-calc" onclick="append('-')">−</button>
@@ -143,7 +169,9 @@
     </form>
 
     {% if result is not none %}
-      <div class="text-center mt-3"><h4>結果: {{ result }}</h4></div>
+      <div class="text-center mt-3">
+        <h4>結果: {{ result }}</h4>
+      </div>
     {% endif %}
   </div>
 
@@ -154,7 +182,9 @@
         <a href="{{ url_for('clear_history') }}" class="btn btn-sm btn-outline-danger">履歴を削除</a>
       </div>
       {% for item in history|reverse %}
-        <div class="history-card">{{ item }}</div>
+        <div class="history-card">
+          {{ item }}
+        </div>
       {% endfor %}
     </div>
   {% endif %}
@@ -162,16 +192,16 @@
   <script>
     function append(val) {
       const input = document.getElementById("expression");
-      if (val === "AC") {
-        clearInput();
-        return;
-      }
-
-      const operators = "+-*/";
       const lastChar = input.value.slice(-1);
 
-      if (operators.includes(val) && operators.includes(lastChar)) {
-        input.value = input.value.slice(0, -1) + val;  // 置き換え
+      if (val === 'AC') {
+        clearInput();
+      } else if (['+', '-', '*', '/'].includes(val)) {
+        if (['+', '-', '*', '/'].includes(lastChar)) {
+          input.value = input.value.slice(0, -1) + val;
+        } else {
+          input.value += val;
+        }
       } else {
         input.value += val;
       }
@@ -180,7 +210,6 @@
     function clearInput() {
       document.getElementById("expression").value = "";
     }
-
     function backspace() {
       const exp = document.getElementById("expression").value;
       document.getElementById("expression").value = exp.slice(0, -1);
@@ -189,10 +218,12 @@
     function toggleTheme() {
       const body = document.body;
       if (body.classList.contains("light-mode")) {
-        body.classList.replace("light-mode", "dark-mode");
+        body.classList.remove("light-mode");
+        body.classList.add("dark-mode");
         localStorage.setItem("theme", "dark");
       } else {
-        body.classList.replace("dark-mode", "light-mode");
+        body.classList.remove("dark-mode");
+        body.classList.add("light-mode");
         localStorage.setItem("theme", "light");
       }
     }
@@ -200,7 +231,8 @@
     window.onload = () => {
       const theme = localStorage.getItem("theme");
       if (theme === "dark") {
-        document.body.classList.replace("light-mode", "dark-mode");
+        document.body.classList.remove("light-mode");
+        document.body.classList.add("dark-mode");
       }
     };
   </script>
