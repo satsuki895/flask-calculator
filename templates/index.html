@@ -1,6 +1,4 @@
 <!-- タイトル: index.html -->
-<!-- Calculator上部タイトル + 電卓下にキャッチーな履歴表示 + 削除ボタン -->
-
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -22,12 +20,6 @@
       color: white;
     }
     .calculator {
-<<<<<<< HEAD
-      max-width: 420px;
-      margin: 40px auto;
-      border-radius: 20px;
-      padding: 30px;
-=======
       width: 100%;
       max-width: 420px;
       aspect-ratio: 7 / 9;
@@ -38,7 +30,6 @@
       display: flex;
       flex-direction: column;
       justify-content: space-between;
->>>>>>> 0a0d3f9 (🔄 最新電卓UIに更新)
     }
     .light-mode .calculator {
       background-color: #ffffff;
@@ -72,9 +63,6 @@
       border-radius: 10px;
       transition: transform 0.2s, background-color 0.3s;
     }
-<<<<<<< HEAD
-=======
-
     @media (max-width: 420px) {
       .btn-calc {
         width: 21vw;
@@ -82,44 +70,21 @@
         font-size: 5vw;
       }
     }
-
->>>>>>> 0a0d3f9 (🔄 最新電卓UIに更新)
-    .btn-calc:hover {
-      transform: scale(1.05);
-    }
-    .btn-calc:active {
-      transform: scale(0.95);
-    }
-    .btn-operator {
-      background-color: #ff6b6b;
-      color: white;
-    }
-    .btn-control {
-      background-color: #4ecdc4;
-      color: white;
-    }
-    .btn-equal {
-      background-color: #ffe66d;
-      color: black;
-    }
+    .btn-calc:hover { transform: scale(1.05); }
+    .btn-calc:active { transform: scale(0.95); }
+    .btn-operator { background-color: #ff6b6b; color: white; }
+    .btn-control { background-color: #4ecdc4; color: white; }
+    .btn-equal { background-color: #ffe66d; color: black; }
     .theme-toggle {
       position: absolute;
       top: 20px;
       right: 30px;
     }
-<<<<<<< HEAD
-=======
-
->>>>>>> 0a0d3f9 (🔄 最新電卓UIに更新)
     .history-section {
       max-width: 420px;
       margin: 0 auto;
       margin-top: 20px;
     }
-<<<<<<< HEAD
-=======
-
->>>>>>> 0a0d3f9 (🔄 最新電卓UIに更新)
     .history-title {
       font-weight: bold;
       font-size: 20px;
@@ -127,20 +92,12 @@
       justify-content: space-between;
       align-items: center;
     }
-<<<<<<< HEAD
-=======
-
->>>>>>> 0a0d3f9 (🔄 最新電卓UIに更新)
     .history-card {
       background-color: rgba(0,0,0,0.05);
       padding: 10px 15px;
       border-radius: 10px;
       margin-bottom: 10px;
     }
-<<<<<<< HEAD
-=======
-
->>>>>>> 0a0d3f9 (🔄 最新電卓UIに更新)
     .dark-mode .history-card {
       background-color: rgba(255,255,255,0.05);
     }
@@ -153,45 +110,28 @@
 
   <div class="calculator">
     <h2 class="text-center mb-3">Calculator</h2>
-
     <form method="POST">
       <input type="text" name="expression" id="expression" value="{{ expression }}" readonly>
-
       <div class="d-flex justify-content-center">
-        <!-- 左側：関数 + 数字 -->
         <div>
-<<<<<<< HEAD
-          <!-- 関数ボタン -->
-=======
->>>>>>> 0a0d3f9 (🔄 最新電卓UIに更新)
           <button type="button" class="btn btn-control btn-calc" onclick="append('AC')">AC</button>
           <button type="button" class="btn btn-control btn-calc" onclick="append('%')">%</button>
-          <button type="button" class="btn btn-control btn-calc" onclick="append('Math.sqrt(')">√</button>
+          <button type="button" class="btn btn-control btn-calc" onclick="append('sqrt(')">√</button>
           <button type="button" class="btn btn-control btn-calc" onclick="append('(')">(</button>
           <button type="button" class="btn btn-control btn-calc" onclick="append(')')">)</button><br>
-
-<<<<<<< HEAD
-          <!-- 数字 -->
-=======
->>>>>>> 0a0d3f9 (🔄 最新電卓UIに更新)
           <button type="button" class="btn btn-secondary btn-calc" onclick="append('7')">7</button>
           <button type="button" class="btn btn-secondary btn-calc" onclick="append('8')">8</button>
           <button type="button" class="btn btn-secondary btn-calc" onclick="append('9')">9</button><br>
-
           <button type="button" class="btn btn-secondary btn-calc" onclick="append('4')">4</button>
           <button type="button" class="btn btn-secondary btn-calc" onclick="append('5')">5</button>
           <button type="button" class="btn btn-secondary btn-calc" onclick="append('6')">6</button><br>
-
           <button type="button" class="btn btn-secondary btn-calc" onclick="append('1')">1</button>
           <button type="button" class="btn btn-secondary btn-calc" onclick="append('2')">2</button>
           <button type="button" class="btn btn-secondary btn-calc" onclick="append('3')">3</button><br>
-
           <button type="button" class="btn btn-control btn-calc" onclick="clearInput()">C</button>
           <button type="button" class="btn btn-secondary btn-calc" onclick="append('0')">0</button>
           <button type="button" class="btn btn-control btn-calc" onclick="backspace()">←</button>
         </div>
-
-        <!-- 右側：演算子 -->
         <div class="d-flex flex-column ms-3">
           <button type="button" class="btn btn-operator btn-calc" onclick="append('+')">+</button>
           <button type="button" class="btn btn-operator btn-calc" onclick="append('-')">−</button>
@@ -203,13 +143,10 @@
     </form>
 
     {% if result is not none %}
-      <div class="text-center mt-3">
-        <h4>結果: {{ result }}</h4>
-      </div>
+      <div class="text-center mt-3"><h4>結果: {{ result }}</h4></div>
     {% endif %}
   </div>
 
-  <!-- 履歴表示セクション -->
   {% if history %}
     <div class="history-section">
       <div class="history-title">
@@ -217,75 +154,55 @@
         <a href="{{ url_for('clear_history') }}" class="btn btn-sm btn-outline-danger">履歴を削除</a>
       </div>
       {% for item in history|reverse %}
-        <div class="history-card">
-          {{ item }}
-        </div>
+        <div class="history-card">{{ item }}</div>
       {% endfor %}
     </div>
   {% endif %}
 
   <script>
     function append(val) {
-<<<<<<< HEAD
-      if (val === 'AC') {
-        clearInput();
-      } else {
-        document.getElementById("expression").value += val;
-      }
-=======
-      const inputField = document.getElementById("expression");
-      let current = inputField.value;
-
-      const operators = "+-*/";
-
-      // AC の場合は初期化
-      if (val === 'AC') {
+      const input = document.getElementById("expression");
+      if (val === "AC") {
         clearInput();
         return;
       }
 
-      // 四則演算子を入力したとき、直前が演算子なら置き換える
-      if (operators.includes(val)) {
-        if (current.length > 0 && operators.includes(current.slice(-1))) {
-          current = current.slice(0, -1);  // 最後の演算子を削除
-        }
-      }
+      const operators = "+-*/";
+      const lastChar = input.value.slice(-1);
 
-      // 値を更新
-      inputField.value = current + val;
->>>>>>> 0a0d3f9 (🔄 最新電卓UIに更新)
+      if (operators.includes(val) && operators.includes(lastChar)) {
+        input.value = input.value.slice(0, -1) + val;  // 置き換え
+      } else {
+        input.value += val;
+      }
     }
+
     function clearInput() {
       document.getElementById("expression").value = "";
     }
+
     function backspace() {
       const exp = document.getElementById("expression").value;
       document.getElementById("expression").value = exp.slice(0, -1);
     }
+
     function toggleTheme() {
       const body = document.body;
       if (body.classList.contains("light-mode")) {
-        body.classList.remove("light-mode");
-        body.classList.add("dark-mode");
+        body.classList.replace("light-mode", "dark-mode");
         localStorage.setItem("theme", "dark");
       } else {
-        body.classList.remove("dark-mode");
-        body.classList.add("light-mode");
+        body.classList.replace("dark-mode", "light-mode");
         localStorage.setItem("theme", "light");
       }
     }
-<<<<<<< HEAD
-=======
 
->>>>>>> 0a0d3f9 (🔄 最新電卓UIに更新)
     window.onload = () => {
       const theme = localStorage.getItem("theme");
       if (theme === "dark") {
-        document.body.classList.remove("light-mode");
-        document.body.classList.add("dark-mode");
+        document.body.classList.replace("light-mode", "dark-mode");
       }
     };
   </script>
-
 </body>
 </html>
