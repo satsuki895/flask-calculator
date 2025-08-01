@@ -151,7 +151,7 @@
               <div>
                 <button type="button" class="btn btn-control btn-calc" onclick="append('AC')">AC</button>
                 <button type="button" class="btn btn-control btn-calc" onclick="append('%')">%</button>
-                <button type="button" class="btn btn-control btn-calc" onclick="append('Math.sqrt(')">√</button>
+                <button type="button" class="btn btn-control btn-calc" onclick="append('sqrt(')">√</button>
                 <button type="button" class="btn btn-control btn-calc" onclick="append('(')">(</button>
                 <button type="button" class="btn btn-control btn-calc" onclick="append(')')">)</button>
               </div>
@@ -214,6 +214,10 @@
 
       if (val === 'AC') {
         clearInput();
+      } else if (val === '%') {
+        input.value += '/100';
+      } else if (val === 'sqrt(') {
+        input.value += 'Math.sqrt(';
       } else if (operators.includes(val)) {
         if (operators.includes(lastChar)) {
           input.value = input.value.slice(0, -1) + val;
