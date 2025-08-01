@@ -38,12 +38,12 @@
       display: flex;
       justify-content: center;
       margin-top: 50px;
+      padding: 0 10px;
     }
 
     .calculator-container {
       width: var(--base-width);
-      transform-origin: top left;
-      transition: transform 0.2s ease;
+      max-width: 100%;
     }
 
     .calculator {
@@ -80,10 +80,10 @@
     }
 
     .btn-calc {
-      width: 70px;
+      width: 100%;
       height: 60px;
       font-size: 22px;
-      margin: 3px;
+      margin: 3px 0;
       border-radius: 10px;
     }
 
@@ -103,7 +103,6 @@
     }
 
     .history-section {
-      width: var(--base-width);
       margin: 20px auto;
       max-width: 100%;
     }
@@ -126,9 +125,27 @@
       background-color: rgba(255, 255, 255, 0.05);
     }
 
+    .button-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 6px;
+    }
+
+    .operator-column {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 6px;
+      margin-left: 8px;
+    }
+
     @media (max-width: 440px) {
-      .calculator-container {
-        transform: scale(calc(100vw / var(--base-width)));
+      .btn-calc {
+        height: 50px;
+        font-size: 18px;
+      }
+      input[type="text"] {
+        font-size: 26px;
       }
     }
   </style>
@@ -146,36 +163,32 @@
           <input type="text" id="expression" name="expression" value="{{ expression }}" readonly>
 
           <div class="d-flex justify-content-center">
-            <div>
-              <!-- 関数ボタン -->
-              <div>
+            <div class="flex-grow-1">
+              <div class="button-grid">
+                <!-- 関数・制御ボタン -->
                 <button type="button" class="btn btn-control btn-calc" onclick="append('AC')">AC</button>
                 <button type="button" class="btn btn-control btn-calc" onclick="append('%')">%</button>
                 <button type="button" class="btn btn-control btn-calc" onclick="append('Math.sqrt(')">√</button>
                 <button type="button" class="btn btn-control btn-calc" onclick="append('(')">(</button>
                 <button type="button" class="btn btn-control btn-calc" onclick="append(')')">)</button>
-              </div>
-              <!-- 数字 -->
-              <div>
+
+                <!-- 数字ボタン -->
                 <button type="button" class="btn btn-secondary btn-calc" onclick="append('7')">7</button>
                 <button type="button" class="btn btn-secondary btn-calc" onclick="append('8')">8</button>
                 <button type="button" class="btn btn-secondary btn-calc" onclick="append('9')">9</button>
-
                 <button type="button" class="btn btn-secondary btn-calc" onclick="append('4')">4</button>
                 <button type="button" class="btn btn-secondary btn-calc" onclick="append('5')">5</button>
                 <button type="button" class="btn btn-secondary btn-calc" onclick="append('6')">6</button>
-
                 <button type="button" class="btn btn-secondary btn-calc" onclick="append('1')">1</button>
                 <button type="button" class="btn btn-secondary btn-calc" onclick="append('2')">2</button>
                 <button type="button" class="btn btn-secondary btn-calc" onclick="append('3')">3</button>
-
                 <button type="button" class="btn btn-control btn-calc" onclick="clearInput()">C</button>
                 <button type="button" class="btn btn-secondary btn-calc" onclick="append('0')">0</button>
                 <button type="button" class="btn btn-control btn-calc" onclick="backspace()">←</button>
               </div>
             </div>
             <!-- 演算子 -->
-            <div class="d-flex flex-column ms-2">
+            <div class="operator-column">
               <button type="button" class="btn btn-operator btn-calc" onclick="append('+')">+</button>
               <button type="button" class="btn btn-operator btn-calc" onclick="append('-')">−</button>
               <button type="button" class="btn btn-operator btn-calc" onclick="append('*')">×</button>
