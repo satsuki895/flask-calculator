@@ -35,13 +35,18 @@
 
     .calculator-wrapper {
       width: 100%;
+      min-height: 100vh;
       display: flex;
       justify-content: center;
-      margin-top: 50px;
+      align-items: flex-start;
+      padding-top: 40px;
+      box-sizing: border-box;
     }
 
     .calculator-container {
       width: var(--base-width);
+      max-width: 100%;
+      box-sizing: border-box;
       transform-origin: top left;
       transition: transform 0.2s ease;
     }
@@ -104,8 +109,9 @@
 
     .history-section {
       width: var(--base-width);
-      margin: 20px auto;
       max-width: 100%;
+      margin: 20px auto;
+      box-sizing: border-box;
     }
 
     .history-title {
@@ -132,6 +138,7 @@
       }
     }
   </style>
+
 </head>
 <body>
   <div class="theme-toggle">
